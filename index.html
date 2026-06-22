@@ -1,11 +1,384 @@
-﻿<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Your Ba Zi Birth Chart — Four Pillars of Destiny</title><style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f0f13;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px}.container{max-width:780px;width:100%}h1{font-size:28px;font-weight:600;color:#f0d59b;margin-bottom:6px}.subtitle{color:#888;font-size:14px;margin-bottom:30px}.card{background:#1a1a24;border-radius:16px;padding:32px;margin-bottom:20px;border:1px solid #2a2a38}.card h2{font-size:17px;color:#f0d59b;margin-bottom:20px}.form-group{margin-bottom:16px}label{display:block;font-size:12px;color:#999;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}input,select{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #333;background:#14141e;color:#e0e0e0;font-size:15px;outline:none}input:focus,select:focus{border-color:#f0d59b}.row{display:flex;gap:10px}.row .form-group{flex:1}.btn{background:#f0d59b;color:#0f0f13;border:none;padding:14px 28px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;width:100%}.btn:hover{background:#e4c484}.result{display:none}.result.visible{display:block}.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}.pillar{background:#14141e;border-radius:12px;padding:16px 10px;text-align:center;border:1px solid #2a2a38}.pillar .plabel{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}.pillar .ganzhi{font-size:20px;font-weight:600;color:#f0d59b;margin-bottom:2px}.pillar .english{font-size:11px;color:#aaa;margin-bottom:4px}.pillar .element{font-size:11px;color:#888}.pillar .desc{font-size:10px;color:#555;margin-top:6px}.ys-box{background:#1a2a1a;border:1px solid #3a5a3a;border-radius:12px;padding:20px;margin-bottom:16px}.ys-box h3{color:#7ddf7d;font-size:14px;margin-bottom:4px}.ys-box .big{font-size:28px;font-weight:700;color:#7ddf7d;margin:6px 0}.ys-box p{color:#aaa;font-size:13px;line-height:1.6}.ys-box ul{color:#aaa;font-size:12px;line-height:1.8;margin-top:8px;padding-left:16px}.js-box{background:#2a1a1a;border:1px solid #5a3a3a;border-radius:12px;padding:20px;margin-bottom:16px}.js-box h3{color:#df7d7d;font-size:14px;margin-bottom:4px}.js-box .big{font-size:28px;font-weight:700;color:#df7d7d;margin:6px 0}.js-box p{color:#aaa;font-size:13px;line-height:1.6}.cta{background:linear-gradient(135deg,#f0d59b,#d4a853);border-radius:12px;padding:24px;text-align:center}.cta h3{color:#0f0f13;font-size:17px;margin-bottom:6px}.cta p{color:#3a3020;font-size:13px;margin-bottom:14px}.cta a{display:inline-block;background:#0f0f13;color:#f0d59b;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}.footer{font-size:11px;color:#555;text-align:center;margin-top:24px}@media(max-width:600px){.pillars{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column}}</style></head><body><div class="container"><h1>✦ Your Ba Zi Birth Chart</h1><p class="subtitle">Based on the Four Pillars of Destiny (八字) — when you took your first breath, the universe left a signature in your energy. Calculate your core element.</p><div class="card"><h2>Enter Your Birth Information</h2><div class="row"><div class="form-group"><label>Year</label><input type="number" id="year" min="1900" max="2100" placeholder="1990"></div><div class="form-group"><label>Month</label><input type="number" id="month" min="1" max="12" placeholder="6"></div><div class="form-group"><label>Day</label><input type="number" id="day" min="1" max="31" placeholder="15"></div></div><div class="row"><div class="form-group"><label>Hour</label><select id="hour"><option value="0">00:00-00:59 — Rat (Zi)</option><option value="1">01:00-02:59 — Ox (Chou)</option><option value="2">03:00-04:59 — Tiger (Yin)</option><option value="3">05:00-06:59 — Rabbit (Mao)</option><option value="4">07:00-08:59 — Dragon (Chen)</option><option value="5">09:00-10:59 — Snake (Si)</option><option value="6" selected>11:00-12:59 — Horse (Wu)</option><option value="7">13:00-14:59 — Goat (Wei)</option><option value="8">15:00-16:59 — Monkey (Shen)</option><option value="9">17:00-18:59 — Rooster (You)</option><option value="10">19:00-20:59 — Dog (Xu)</option><option value="11">21:00-22:59 — Pig (Hai)</option></select></div><div class="form-group"><label>Minute</label><select id="minute"><option value="0">:00</option><option value="15">:15</option><option value="30">:30</option><option value="45">:45</option></select></div></div><button class="btn" onclick="calc()">Calculate My Chart</button></div><div class="result" id="result"><div class="animal-line" id="animalLine"></div><div class="card"><h2>✦ Your Four Pillars</h2><div class="pillars" id="pillars"></div></div><div id="ysContainer"></div><div id="jsContainer"></div><div class="cta"><h3>✦ You Know Your Element — Now What?</h3><p>Each element needs a different room setup, colors, and objects.<br>Your personalized activation guide is one click away.</p><a href="https://ko-fi.com/dao17413/shop" target="_blank">Get Your Element Activation Guide →</a></div></div><div class="footer">This tool is for educational purposes. Ba Zi is a traditional Chinese philosophical system, not a scientific diagnostic.</div></div><script>var TG="甲乙丙丁戊己庚辛壬癸";var DZ="子丑寅卯辰巳午未申酉戌亥";var SE=["Jia","Yi","Bing","Ding","Wu","Ji","Geng","Xin","Ren","Gui"];var SEL=["Wood","Wood","Fire","Fire","Earth","Earth","Metal","Metal","Water","Water"];var AN=["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"];var BEL=["Water","Earth","Wood","Wood","Earth","Fire","Fire","Earth","Metal","Metal","Earth","Water"];var SYM={Wood:"🌳",Fire:"🔥",Earth:"⛰️",Metal:"⚔️",Water:"💧"};var ACT={Fire:["Add FIRE: warm lighting, candles, red/orange","South-facing rooms energize career","Triangular shapes strengthen fire","Avoid excess Water (dark, aquariums)"],Water:["Add WATER: black/blue, mirrors, features","North-facing rooms amplify intuition","Flowing shapes channel adaptability","Avoid excess Earth (ceramics, yellow)"],Wood:["Add WOOD: plants, green, wood furniture","East-facing workspaces boost creativity","Leafy plants in east activate career","Avoid excess Metal objects"],Metal:["Add METAL: white/gray/silver, round","West-facing area is your power zone","Coins and bells enhance precision","Avoid excess Fire (candles, red)"],Earth:["Add EARTH: ceramics, yellow/terracotta","Home center is your power zone","Crystals reinforce stability","Avoid excess Wood (plants)"]};var JI={Wood:"Metal",Fire:"Water",Earth:"Wood",Metal:"Fire",Water:"Earth"};function solarTermMonthBranch(y,m,d){var days=[0,31,59,90,120,151,181,212,243,273,304,334];var thresholds=[0,  // placeholder];var isLeap=(y%4===0&&y%100!==0)||y%400===0;var leapAdj=isLeap&&m>2?1:0;var solterms=[4,64,94,125,156,187,218,249,279,310,340,370];var doy=d+days[m-1]+leapAdj;for(var i=0;i<12;i++){if(doy<solterms[i]){return (i+1)%12}}return 0;}<script>var TG="甲乙丙丁戊己庚辛壬癸";var DZ="子丑寅卯辰巳午未申酉戌亥";var SE=["Jia","Yi","Bing","Ding","Wu","Ji","Geng","Xin","Ren","Gui"];var SEL=["Wood","Wood","Fire","Fire","Earth","Earth","Metal","Metal","Water","Water"];var AN=["Rat","Ox","Tiger","Rabbit","Dragon","Snake","Horse","Goat","Monkey","Rooster","Dog","Pig"];var BEL=["Water","Earth","Wood","Wood","Earth","Fire","Fire","Earth","Metal","Metal","Earth","Water"];var SYM={Wood:"🌳",Fire:"🔥",Earth:"⛰️",Metal:"⚔️",Water:"💧"};var ACT={Fire:["Add FIRE: warm lighting, candles, red/orange","South-facing rooms energize career","Triangular shapes strengthen fire","Avoid excess Water (dark, aquariums)"],Water:["Add WATER: black/blue, mirrors, features","North-facing rooms amplify intuition","Flowing shapes channel adaptability","Avoid excess Earth (ceramics, yellow)"],Wood:["Add WOOD: plants, green, wood furniture","East-facing workspaces boost creativity","Leafy plants in east activate career","Avoid excess Metal objects"],Metal:["Add METAL: white/gray/silver, round","West-facing area is your power zone","Coins and bells enhance precision","Avoid excess Fire (candles, red)"],Earth:["Add EARTH: ceramics, yellow/terracotta","Home center is your power zone","Crystals reinforce stability","Avoid excess Wood (plants)"]};var JI={Wood:"Metal",Fire:"Water",Earth:"Wood",Metal:"Fire",Water:"Earth"};function solarTermMonthBranch(y,m,d){var days=[0,31,59,90,120,151,181,212,243,273,304,334];var isLeap=(y%4===0&&y%100!==0)||y%400===0;var adj=isLeap&&m>2?1:0;var doy=d+days[m-1]+adj;var solterms=[4,64,94,125,156,187,218,249,279,310,340,370];for(var i=0;i<12;i++){if(doy<solterms[i]){return(i+1)%12}}return 0}function calc(){var y=+document.getElementById("year").value;var m=+document.getElementById("month").value;var d=+document.getElementById("day").value;var h=+document.getElementById("hour").value;if(!y||!m||!d){alert("Enter year, month, day.");return}var ys=((y-4)%10+10)%10;var yz=((y-4)%12+12)%12;var mz=solarTermMonthBranch(y,m,d);var ms=((Math.floor(ys/2)%5)*2+(mz-1)%12+10)%10;var a=Math.floor((14-m)/12),yy=y-a,mm=m+12*a-2;var jd=d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045;var ds=((jd+15)%10+10)%10;var dz=((jd+13)%12+12)%12;var hs=(Math.floor(ds/2)*2+h)%10;var dmel=SEL[ds];var sn=[2,3,4].includes(mz)?0:[5,6,7].includes(mz)?1:[8,9,10].includes(mz)?2:3;var ysd=getYS(dmel,sn),j=JI[ysd.el];var labs=["Year","Month","Day","Hour"];var descs=["Family &amp; heritage","Career &amp; social","YOUR CORE","Later life &amp; talent"];var gs=[ys,ms,ds,hs],zs=[yz,mz,dz,h];var ph="";for(var i=0;i<4;i++){var gi=(gs[i]%10+10)%10;var zi=(zs[i]%12+12)%12;ph+="<div class=\"pillar\"><div class=\"plabel\">"+labs[i]+"</div>"+"<div class=\"ganzhi\">"+TG[gi]+DZ[zi]+"</div>"+"<div class=\"english\">"+SE[gi]+" "+AN[zi]+"</div>"+"<div class=\"element\">"+SYM[SEL[gi]]+" "+SEL[gi]+" + "+SYM[BEL[zi]]+" "+BEL[zi]+"</div>"+"<div class=\"desc\">"+descs[i]+"</div></div>"}document.getElementById("animalLine").innerHTML="✦ Your animal sign: <strong>"+AN[(yz%12+12)%12]+"</strong>";document.getElementById("pillars").innerHTML=ph;document.getElementById("ysContainer").innerHTML="<div class=\"ys-box\"><h3>✦ Your Favorite Element (用神 / Yong Shen)</h3><div class=\"big\">"+SYM[ysd.el]+" "+ysd.el+"</div><p>"+ysd.r+"</p><p style=\"margin-top:10px;color:#8ddf8d;font-size:13px;\"><strong>To activate "+ysd.el+" in your home:</strong></p><ul>"+(ACT[ysd.el]||["Balance is key."]).map(function(t){return"<li>"+t+"</li>"}).join("")+"</ul></div>";document.getElementById("jsContainer").innerHTML="<div class=\"js-box\"><h3>✦ Your Unfavorable Element (忌神 / Ji Shen)</h3><div class=\"big\">"+SYM[j]+" "+j+"</div><p>"+j+" energy can drain you if over-activated. Minimize "+j.toLowerCase()+" colors and objects.</p></div>";document.getElementById("result").classList.add("visible");document.getElementById("result").scrollIntoView({behavior:"smooth",block:"start"})}function getYS(dm,s){var d={Wood:[{el:"Fire",r:"Spring Wood is lush. Fire releases creative energy."},{el:"Water",r:"Summer Wood is scorched. Water nourishes."},{el:"Wood",r:"Autumn Wood withers. More Wood strengthens."},{el:"Fire",r:"Winter Wood frozen. Fire activates."}],Fire:[{el:"Wood",r:"Spring Fire needs fuel. Wood sustains."},{el:"Water",r:"Summer Fire blazes. Water channels."},{el:"Wood",r:"Autumn Fire fades. Wood revives."},{el:"Wood",r:"Winter Fire struggles. Wood fuels."}],Earth:[{el:"Fire",r:"Spring Earth needs warmth. Fire activates."},{el:"Water",r:"Summer Earth cracks. Water brings flexibility."},{el:"Fire",r:"Autumn Earth rests. Fire regenerates."},{el:"Fire",r:"Winter Earth frozen. Fire awakens."}],Metal:[{el:"Earth",r:"Spring Metal depletes. Earth supports."},{el:"Water",r:"Summer Metal melts. Water preserves."},{el:"Water",r:"Autumn Metal shines. Water channels wealth."},{el:"Fire",r:"Winter Metal brittle. Fire tempers."}],Water:[{el:"Earth",r:"Spring Water scatters. Earth contains."},{el:"Earth",r:"Summer Water evaporates. Earth preserves."},{el:"Wood",r:"Autumn Water swells. Wood channels abundance."},{el:"Fire",r:"Winter Water floods. Fire gives purpose."}]};return d[dm]?d[dm][s]:{el:"Earth",r:"Balance is key."}}</script><div class="cta" style="margin-top:20px">
-  <h3>✦ Want to Activate Your Wealth Corner?</h3>
-  <p>Your Ba Zi chart reveals your core element. Now learn exactly where to place your wealth corner — based on Feng Shui logic, not guesswork.</p>
-  <a href="https://ko-fi.com/s/ae62b4c35f" target="_blank">Get the 3-Step Guide →</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Your Ba Zi Birth Chart — Four Pillars of Destiny</title>
+<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline';">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;background:#0f0f13;color:#e0e0e0;min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:40px 20px}
+.container{max-width:780px;width:100%}
+h1{font-size:28px;font-weight:600;color:#f0d59b;margin-bottom:6px}
+.subtitle{color:#888;font-size:14px;margin-bottom:30px}
+.card{background:#1a1a24;border-radius:16px;padding:32px;margin-bottom:20px;border:1px solid #2a2a38}
+.card h2{font-size:17px;color:#f0d59b;margin-bottom:20px}
+.form-group{margin-bottom:16px}
+label{display:block;font-size:12px;color:#999;margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+input,select{width:100%;padding:11px 14px;border-radius:10px;border:1px solid #333;background:#14141e;color:#e0e0e0;font-size:15px;outline:none}
+input:focus,select:focus{border-color:#f0d59b}
+.row{display:flex;gap:10px}
+.row .form-group{flex:1}
+.btn{background:#f0d59b;color:#0f0f13;border:none;padding:14px 28px;border-radius:10px;font-size:16px;font-weight:600;cursor:pointer;width:100%;margin-top:10px}
+.btn:hover{background:#e4c484}
+.result{display:none}
+.result.visible{display:block}
+.pillars{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px}
+.pillar{background:#14141e;border-radius:12px;padding:16px 10px;text-align:center;border:1px solid #2a2a38}
+.pillar .plabel{font-size:10px;color:#666;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.pillar .ganzhi{font-size:20px;font-weight:600;color:#f0d59b;margin-bottom:2px}
+.pillar .english{font-size:11px;color:#aaa;margin-bottom:4px}
+.pillar .element{font-size:11px;color:#888}
+.pillar .desc{font-size:10px;color:#555;margin-top:6px}
+.ys-box{background:#1a2a1a;border:1px solid #3a5a3a;border-radius:12px;padding:20px;margin-bottom:16px}
+.ys-box h3{color:#7ddf7d;font-size:14px;margin-bottom:4px}
+.ys-box .big{font-size:28px;font-weight:700;color:#7ddf7d;margin:6px 0}
+.ys-box p{color:#aaa;font-size:13px;line-height:1.6}
+.js-box{background:#2a1a1a;border:1px solid #5a3a3a;border-radius:12px;padding:20px;margin-bottom:16px}
+.js-box h3{color:#df7d7d;font-size:14px;margin-bottom:4px}
+.js-box .big{font-size:28px;font-weight:700;color:#df7d7d;margin:6px 0}
+.js-box p{color:#aaa;font-size:13px;line-height:1.6}
+.cta{background:linear-gradient(135deg,#f0d59b,#d4a853);border-radius:12px;padding:24px;text-align:center;margin-top:20px}
+.cta h3{color:#0f0f13;font-size:17px;margin-bottom:6px}
+.cta p{color:#3a3020;font-size:13px;margin-bottom:14px}
+.cta a{display:inline-block;background:#0f0f13;color:#f0d59b;padding:12px 28px;border-radius:8px;font-size:14px;font-weight:600;text-decoration:none}
+.footer{font-size:11px;color:#555;text-align:center;margin-top:24px}
+@media(max-width:600px){.pillars{grid-template-columns:repeat(2,1fr)}.row{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>✦ Your Ba Zi Birth Chart</h1>
+<p class="subtitle">Based on the Four Pillars of Destiny — when you took your first breath, the universe left a signature in your energy.</p>
+<div class="card">
+<h2>Enter Your Birth Information</h2>
+<div class="row">
+<div class="form-group"><label for="year">Year</label><input type="number" id="year" aria-label="Year" min="1900" max="2100" placeholder="1990"></div>
+<div class="form-group"><label for="month">Month</label><input type="number" id="month" aria-label="Month" min="1" max="12" placeholder="6"></div>
+<div class="form-group"><label for="day">Day</label><input type="number" id="day" aria-label="Day" min="1" max="31" placeholder="15"></div>
+</div>
+<div class="row">
+<div class="form-group"><label for="hour">Hour</label>
+<select id="hour" aria-label="Hour">
+<option value="0">23:00-00:59 — Rat (Zi)</option>
+<option value="1">01:00-02:59 — Ox (Chou)</option>
+<option value="2">03:00-04:59 — Tiger (Yin)</option>
+<option value="3">05:00-06:59 — Rabbit (Mao)</option>
+<option value="4">07:00-08:59 — Dragon (Chen)</option>
+<option value="5">09:00-10:59 — Snake (Si)</option>
+<option value="6" selected>11:00-12:59 — Horse (Wu)</option>
+<option value="7">13:00-14:59 — Goat (Wei)</option>
+<option value="8">15:00-16:59 — Monkey (Shen)</option>
+<option value="9">17:00-18:59 — Rooster (You)</option>
+<option value="10">19:00-20:59 — Dog (Xu)</option>
+<option value="11">21:00-22:59 — Pig (Hai)</option>
+</select></div>
+<div class="form-group"><label for="minute">Minute</label>
+<select id="minute" aria-label="Minute">
+<option value="0">:00</option><option value="15">:15</option>
+<option value="30">:30</option><option value="45">:45</option>
+</select></div>
+<div class="form-group"><label for="gender">Gender</label>
+<select id="gender" aria-label="Gender">
+<option value="male">Male</option>
+<option value="female">Female</option>
+</select></div>
+</div>
+<button class="btn" id="calcBtn">Calculate My Chart</button>
+</div>
+<div class="result" id="result">
+<div class="animal-line" id="animalLine"></div>
+<div class="card"><h2>✦ Your Four Pillars</h2><div class="pillars" id="pillars"></div></div>
+<div id="ysContainer"></div>
+<div id="jsContainer"></div>
+</div>
+<div class="cta">
+<h3>✦ Want to Activate Your Wealth Corner?</h3>
+<p>Your Ba Zi chart reveals your core element. Now learn exactly where to place your wealth corner — based on Feng Shui logic, not guesswork.</p>
+<a href="https://ko-fi.com/s/ae62b4c35f" target="_blank">Get the 3-Step Guide →</a>
 </div>
 <div class="footer">
-  <p>Ba Zi calculator provided as a free tool. For professional Feng Shui &amp; Ba Zi consultation, visit the Ko-fi shop.</p>
-  <p style="margin-top:4px">© 2026 · Science of Space</p>
+<p>Ba Zi calculator provided as a free tool. For professional Feng Shui &amp; Ba Zi consultation, visit the Ko-fi shop.</p>
+<p style="margin-top:4px">© 2026 · Science of Space</p>
 </div>
-</body></html>
+</div>
+<script>var Gan=['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'];
+var Zhi=['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'];
+var CANG_GAN={'子':['癸'],'丑':['己','癸','辛'],'寅':['甲','丙','戊'],'卯':['乙'],'辰':['戊','乙','癸'],'巳':['丙','庚','戊'],'午':['丁','己'],'未':['己','丁','乙'],'申':['庚','壬','戊'],'酉':['辛'],'戌':['戊','辛','丁'],'亥':['壬','甲']};
 
+// 二十四节气近似时间（分钟），用于判断年柱/月柱交节边界。
+var termInfo = [0,21208,42467,63836,85337,107014,128867,150921,173149,195551,218072,240693,263343,285989,308563,331033,353350,375494,397447,419210,440795,462224,483532,504758];
+
+function getTermDay(y, n) {
+  var offDate = new Date((31556925974.7 * (y - 1890) + termInfo[n] * 60000) + Date.UTC(1890, 0, 5, 16, 2, 31));
+  return offDate.getUTCDate();
+}
+
+var lunarMonthNames = ['正月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+var lunarDayNames = ['初一','初二','初三','初四','初五','初六','初七','初八','初九','初十','十一','十二','十三','十四','十五','十六','十七','十八','十九','二十','廿一','廿二','廿三','廿四','廿五','廿六','廿七','廿八','廿九','三十'];
+var minLunarYear = 1890;
+var maxLunarYear = 2100;
+// 农历数据：[闰月(0=无), 正月初一公历月, 正月初一公历日, 月份大小二进制]，覆盖 1890-2100。
+var lunarInfo = [
+  [2,1,21,22184],[0,2,9,21936],[6,1,30,9656],[0,2,17,9584],[0,2,6,21168],[5,1,26,43344],[0,2,13,59728],[0,2,2,27296],[3,1,22,44368],[0,2,10,43856],
+  [8,1,30,19304],[0,2,19,19168],[0,2,8,42352],[5,1,29,21096],[0,2,16,53856],[0,2,4,55632],[4,1,25,27304],[0,2,13,22176],[0,2,2,39632],[2,1,22,19176],
+  [0,2,10,19168],[6,1,30,42200],[0,2,18,42192],[0,2,6,53840],[5,1,26,54568],[0,2,14,46400],[0,2,3,54944],[2,1,23,38608],[0,2,11,38320],[7,2,1,18872],
+  [0,2,20,18800],[0,2,8,42160],[5,1,28,45656],[0,2,16,27216],[0,2,5,27968],[4,1,24,44456],[0,2,13,11104],[0,2,2,38256],[2,1,23,18808],[0,2,10,18800],
+  [6,1,30,25776],[0,2,17,54432],[0,2,6,59984],[5,1,26,27976],[0,2,14,23248],[0,2,4,11104],[3,1,24,37744],[0,2,11,37600],[7,1,31,51560],[0,2,19,51536],
+  [0,2,8,54432],[6,1,27,55888],[0,2,15,46416],[0,2,5,22176],[4,1,25,43736],[0,2,13,9680],[0,2,2,37584],[2,1,22,51544],[0,2,10,43344],[7,1,29,46248],
+  [0,2,17,27808],[0,2,6,46416],[5,1,27,21928],[0,2,14,19872],[0,2,3,42416],[3,1,24,21176],[0,2,12,21168],[8,1,31,43344],[0,2,18,59728],[0,2,8,27296],
+  [6,1,28,44368],[0,2,15,43856],[0,2,5,19296],[4,1,25,42352],[0,2,13,42352],[0,2,2,21088],[3,1,21,59696],[0,2,9,55632],[7,1,30,23208],[0,2,17,22176],
+  [0,2,6,38608],[5,1,27,19176],[0,2,15,19152],[0,2,3,42192],[4,1,23,53864],[0,2,11,53840],[8,1,31,54568],[0,2,18,46400],[0,2,7,46752],[6,1,28,38608],
+  [0,2,16,38320],[0,2,5,18864],[4,1,25,42168],[0,2,13,42160],[10,2,2,45656],[0,2,20,27216],[0,2,9,27968],[6,1,29,44448],[0,2,17,43872],[0,2,6,38256],
+  [5,1,27,18808],[0,2,15,18800],[0,2,4,25776],[3,1,23,27216],[0,2,10,59984],[8,1,31,27432],[0,2,19,23232],[0,2,7,43872],[5,1,28,37736],[0,2,16,37600],
+  [0,2,5,51552],[4,1,24,54440],[0,2,12,54432],[0,2,1,55888],[2,1,22,23208],[0,2,9,22176],[7,1,29,43736],[0,2,18,9680],[0,2,7,37584],[5,1,26,51544],
+  [0,2,14,43344],[0,2,3,46240],[4,1,23,46416],[0,2,10,44368],[9,1,31,21928],[0,2,19,19360],[0,2,8,42416],[6,1,28,21176],[0,2,16,21168],[0,2,5,43312],
+  [4,1,25,29864],[0,2,12,27296],[0,2,1,44368],[2,1,22,19880],[0,2,10,19296],[6,1,29,42352],[0,2,17,42208],[0,2,6,53856],[5,1,26,59696],[0,2,13,54576],
+  [0,2,3,23200],[3,1,23,27472],[0,2,11,38608],[11,1,31,19176],[0,2,19,19152],[0,2,8,42192],[6,1,28,53848],[0,2,15,53840],[0,2,4,54560],[5,1,24,55968],
+  [0,2,12,46496],[0,2,1,22224],[2,1,22,19160],[0,2,10,18864],[7,1,30,42168],[0,2,17,42160],[0,2,6,43600],[5,1,26,46376],[0,2,14,27936],[0,2,2,44448],
+  [3,1,23,21936],[0,2,11,37744],[8,2,1,18808],[0,2,19,18800],[0,2,8,25776],[6,1,28,27216],[0,2,15,59984],[0,2,4,27424],[4,1,24,43872],[0,2,12,43744],
+  [0,2,2,37600],[3,1,21,51568],[0,2,9,51552],[7,1,29,54440],[0,2,17,54432],[0,2,5,55888],[5,1,26,23208],[0,2,14,22176],[0,2,3,42704],[4,1,23,21224],
+  [0,2,11,21200],[8,1,31,43352],[0,2,19,43344],[0,2,7,46240],[6,1,27,46416],[0,2,15,44368],[0,2,5,21920],[4,1,24,42448],[0,2,12,42416],[0,2,2,21168],
+  [3,1,22,43320],[0,2,9,26928],[7,1,29,29336],[0,2,17,27296],[0,2,6,44368],[5,1,26,19880],[0,2,14,19296],[0,2,3,42352],[4,1,24,21104],[0,2,10,53856],
+  [8,1,30,59696],[0,2,18,54560],[0,2,7,55968],[6,1,27,27472],[0,2,15,22224],[0,2,5,19168],[4,1,25,42216],[0,2,12,42192],[0,2,1,53584],[2,1,21,55592],
+  [0,2,9,54560]
+];
+
+function getLeapMonth(lY) {
+  if (lY < minLunarYear || lY > maxLunarYear) return 0;
+  return lunarInfo[lY - minLunarYear][0];
+}
+
+function getLunarYearDays(lY) {
+  if (lY < minLunarYear || lY > maxLunarYear) throw new Error('农历年份超出支持范围：' + minLunarYear + '-' + maxLunarYear);
+  var row = lunarInfo[lY - minLunarYear];
+  var leap = row[0];
+  var bits = row[3].toString(2).split('');
+  while (bits.length < 16) bits.unshift('0');
+  var len = leap ? 13 : 12;
+  var monthDays = [];
+  var total = 0;
+  for (var i = 0; i < len; i++) {
+    var md = bits[i] === '1' ? 30 : 29;
+    monthDays.push(md);
+    total += md;
+  }
+  return {total: total, monthDays: monthDays};
+}
+
+function lunarMonthToIndex(lY, lM, isLeap) {
+  var leap = getLeapMonth(lY);
+  if (lM < 1 || lM > 12) throw new Error('农历月份必须在1-12之间。');
+  if (isLeap) {
+    if (leap !== lM) throw new Error(lY + '年只有闰' + leap + '月，请重新选择闰月。');
+    return lM;
+  }
+  return leap && lM > leap ? lM : lM - 1;
+}
+
+function lunarIndexToMonth(lY, monthIndex) {
+  var leap = getLeapMonth(lY);
+  if (leap && monthIndex === leap) return {month: leap, isLeap: true};
+  if (leap && monthIndex > leap) return {month: monthIndex, isLeap: false};
+  return {month: monthIndex + 1, isLeap: false};
+}
+
+function solarToLunar(sY, sM, sD) {
+  var solar = new Date(Date.UTC(sY, sM - 1, sD));
+  if (solar.getUTCFullYear() !== sY || solar.getUTCMonth() + 1 !== sM || solar.getUTCDate() !== sD) {
+    throw new Error('阳历日期不存在，请重新选择。');
+  }
+  var row = lunarInfo[sY - minLunarYear];
+  if (!row) throw new Error('阳历年份超出支持范围：' + minLunarYear + '-' + maxLunarYear);
+  var zheng = Date.UTC(sY, row[1] - 1, row[2]);
+  var diff = Math.floor((solar.getTime() - zheng) / 86400000);
+  var lunarYear = diff >= 0 ? sY : sY - 1;
+  if (diff < 0) {
+    var prevRow = lunarInfo[lunarYear - minLunarYear];
+    if (!prevRow) throw new Error('阳历年份超出支持范围。');
+    zheng = Date.UTC(lunarYear, prevRow[1] - 1, prevRow[2]);
+    diff = Math.floor((solar.getTime() - zheng) / 86400000);
+  }
+  var yd = getLunarYearDays(lunarYear);
+  var monthIndex = 0;
+  while (monthIndex < yd.monthDays.length && diff >= yd.monthDays[monthIndex]) {
+    diff -= yd.monthDays[monthIndex];
+    monthIndex++;
+  }
+  var lm = lunarIndexToMonth(lunarYear, monthIndex);
+  var day = diff + 1;
+  var monthName = (lm.isLeap ? '闰' : '') + lunarMonthNames[lm.month - 1];
+  return {
+    lunarYear: lunarYear,
+    lunarMonth: lm.month,
+    lunarDay: day,
+    lunarMonthName: monthName,
+    lunarDayName: lunarDayNames[day - 1] || (day + '日'),
+    GanZhiYear: Gan[((lunarYear - 4) % 10 + 10) % 10] + Zhi[((lunarYear - 4) % 12 + 12) % 12],
+    lunarLeapMonth: getLeapMonth(lunarYear),
+    isLeapMonth: lm.isLeap
+  };
+}
+
+function lunarToSolar(lY, lM, lD, isLeap) {
+  var row = lunarInfo[lY - minLunarYear];
+  if (!row) throw new Error('农历年份超出支持范围：' + minLunarYear + '-' + maxLunarYear);
+  var yd = getLunarYearDays(lY);
+  var monthIndex = lunarMonthToIndex(lY, lM, !!isLeap);
+  var maxDay = yd.monthDays[monthIndex];
+  if (lD < 1 || lD > maxDay) {
+    throw new Error('农历 ' + lY + '年' + (isLeap ? '闰' : '') + lM + '月只有' + maxDay + '天。');
+  }
+  var offset = lD - 1;
+  for (var i = 0; i < monthIndex; i++) offset += yd.monthDays[i];
+  var solarMs = Date.UTC(lY, row[1] - 1, row[2]) + offset * 86400000;
+  var d = new Date(solarMs);
+  return {year: d.getUTCFullYear(), month: d.getUTCMonth() + 1, day: d.getUTCDate()};
+}
+
+function getBazi(y, m, d, h, min) {
+  var baseDate = new Date(y, m - 1, d, h, min);
+  // 1. 考虑23点晚子时前移进位逻辑
+  if (h >= 23) {
+    baseDate.setTime(baseDate.getTime() + 24 * 3600 * 1000);
+  }
+  var cy = baseDate.getFullYear();
+  var cm = baseDate.getMonth() + 1;
+  var cd = baseDate.getDate();
+
+  // 2. 年柱卡点：以立春为界，23点后已进到次日时也同步参与判断。
+  var yearNum = cy;
+  var liChunDay = getTermDay(cy, 2);
+  if (cm < 2 || (cm === 2 && cd < liChunDay)) {
+    yearNum = cy - 1;
+  }
+  var ygz = ((yearNum - 4) % 60 + 60) % 60;
+  var yTG = ygz % 10, yDZ = ygz % 12;
+
+  // 3. 月柱卡点：以十二节为界，立春起寅月，小寒起丑月。
+  var jieDay = getTermDay(cy, (cm - 1) * 2);
+  var targetMonth = (cd >= jieDay) ? cm : cm - 1;
+  if (targetMonth === 0) {
+    targetMonth = 12;
+    yearNum = cy - 1;
+  }
+  var monthOffset = (targetMonth + 10) % 12; // 寅月=0，卯月=1...丑月=11
+  var mDZ = (monthOffset + 2) % 12;
+  var wuHu = [2, 4, 6, 8, 0]; 
+  var mTG = (wuHu[yTG % 5] + monthOffset) % 10;
+
+  // 4. 日柱排盘：以1970-01-01辛巳日（第17位）进行绝对天数递增模60滚动。
+  var dateUtc = Date.UTC(cy, cm - 1, cd);
+  var baseUtc = Date.UTC(1970, 0, 1); 
+  var diffDays = Math.floor((dateUtc - baseUtc) / 86400000);
+  var dgz = (diffDays + 17) % 60;
+  if (dgz < 0) dgz += 60;
+  var dTG = dgz % 10, dDZ = dgz % 12;
+
+  // 5. 时柱排盘：结合日干通过“五鼠遁公诀”顺推
+  var shiZhiIdx = Math.floor((h + 1) / 2) % 12;
+  var hDZ = shiZhiIdx;
+  var wuShuOffsets = [0, 2, 4, 6, 8]; 
+  var hTG = (wuShuOffsets[dTG % 5] + shiZhiIdx) % 10;
+
+  return {
+    tg: [yTG, mTG, dTG, hTG],
+    dz: [yDZ, mDZ, dDZ, hDZ],
+    sz: [Gan[yTG]+Zhi[yDZ], Gan[mTG]+Zhi[mDZ], Gan[dTG]+Zhi[dDZ], Gan[hTG]+Zhi[hDZ]]
+  };
+}
+
+function getSS(rg, og) {
+  if (og === rg) return '比肩';
+  var yinYang = [0,1,0,1,0,1,0,1,0,1];
+  var ry = yinYang[rg], oy = yinYang[og];
+  var fuxingRG = Math.floor(rg/2); // 0木 1火 2土 3金 4水
+  var fuxingOG = Math.floor(og/2);
+  
+  if (fuxingRG === fuxingOG) return ry === oy ? '比肩' : '劫财';
+  if ((fuxingOG === 4 && fuxingRG === 0) || (fuxingOG === fuxingRG - 1)) return ry === oy ? '偏印' : '正印';
+  if (((rg===0||rg===1)&&(og===6||og===7)) || ((rg===2||rg===3)&&(og===8||og===9)) || ((rg===4||rg===5)&&(og===0||og===1)) || ((rg===6||rg===7)&&(og===2||og===3)) || ((rg===8||rg===9)&&(og===4||og===5))) {
+    return ry === oy ? '七杀' : '正官';
+  }
+  if ((fuxingRG === 1 && fuxingOG === 3) || (fuxingRG === 3 && fuxingOG === 0) || (fuxingRG === 0 && fuxingOG === 2) || (fuxingRG === 2 && fuxingOG === 4) || (fuxingRG === 4 && fuxingOG === 1)) return ry === oy ? '偏财' : '正财';
+  if ((fuxingRG === 4 && fuxingOG === 0) || (fuxingRG === fuxingOG - 1)) return ry === oy ? '食神' : '伤官';
+  return '比肩';
+}
+
+function judge(bazi) {
+  var rg = bazi.tg[2];
+  var pillars = [];
+  var names = ['年柱','月柱','日柱','时柱'];
+  
+  for(var i=0; i<4; i++) {
+    var g = bazi.tg[i];
+    var z = bazi.dz[i];
+    var zhiName = Zhi[z];
+    var cg = CANG_GAN[zhiName] || [];
+    var ag = [g].concat(cg.map(function(c){ return Gan.indexOf(c); }));
+    var ss = ag.map(function(g2){ return getSS(rg, g2); });
+    var hasGuan = ss.indexOf('正官') >= 0 || ss.indexOf('七杀') >= 0;
+    
+    pillars.push({
+      name: names[i],
+      zone: i < 2 ? 'away' : 'home',
+      gan: Gan[g],
+      zhi: zhiName,
+      cangs: cg,
+      shiShens: ss,
+      hasGuan: hasGuan
+    });
+  }
+  
+  var homeHas = pillars[2].hasGuan || pillars[3].hasGuan;
+  var awayHas = pillars[0].hasGuan || pillars[1].hasGuan;
+  var yuelingGuan = pillars[1].shiShens.slice(1).indexOf('正官') >= 0 || pillars[1].shiShens.slice(1).indexOf('七杀') >= 0;
+  var shizhiGuan = pillars[3].shiShens.slice(1).indexOf('正官') >= 0 || pillars[3].shiShens.slice(1).indexOf('七杀') >= 0;
+
+  var lv = 0, name = '自主创业/自由职业', stars = '☆☆☆', icon = '🌾', desc = '【伤官生财/食神制杀格】命局中家内家外未能引通官杀星，天生不喜条条框框的束缚。更适合在市场经济中自主拼搏，自由度高，上限由财星决定！';
+  
+  if (homeHas && awayHas) {
+    if (yuelingGuan || shizhiGuan) {
+      lv = 3; name = '行政公务员编制'; stars = '★★★'; icon = '🏛️'; desc = '【官气通根格】官杀星雄踞月令或时支门户，且内外引通！生来便带公职贵气，极易通过国考、省考进入核心权力或行政机关，端稳金饭碗。';
+    } else {
+      var mg = pillars[1].shiShens[0];
+      if (mg === '比肩' || mg === '劫财') {
+        lv = 1; name = '大型央企/国企编制'; stars = '★☆☆'; icon = '🏢'; desc = '【官星有劫格】月干透出比劫，而官杀星在外护航。多就职于资源垄断型央企、国企或混合所有制龙头，稳定有余且抗风险能力极强。';
+      } else {
+        lv = 2; name = '全额事业编/高校公职'; stars = '★★☆'; icon = '🏫'; desc = '【财官相生/杀印相生格】官杀星在命局中发挥了稳定作用，极易进入高校、医院、科研院所等全额拨款的事业单位，清高有声望，旱涝保收。';
+      }
+    }
+  } 
+  else if (awayHas && !homeHas) {
+    lv = 1; name = '大厂骨干/外企高管'; stars = '★☆☆'; icon = '💼'; desc = '【官星虚透格】官杀星只在年月的远方闪烁，家里没沾上。说明你服务的平台很大（如名企、跨国大厂），在外风光，但缺乏铁饭碗体制在内遮风挡雨。';
+  } 
+  else if (homeHas && !awayHas) {
+    lv = 1; name = '地方豪强/家族企业'; stars = '★☆☆'; icon = '🏡'; desc = '【官星闭门格】官杀星锁在家里（日时），外门没开。代表适合在本地、自家企业或特定垂直圈子内称王称霸，虽无官方大编制，幕后掌握实权。';
+  }
+  
+  return {pillars: pillars, homeHasGuan: homeHas, awayHasGuan: awayHas, level: lv, levelName: name, stars: stars, icon: icon, levelDesc: desc};
+}
+
+
+
+function calc() {
+  try {
+    var y=parseInt(document.getElementById('year').value),m=parseInt(document.getElementById('month').value),d=parseInt(document.getElementById('day').value),hS=parseInt(document.getElementById('hour').value),mi=parseInt(document.getElementById('minute').value)||0,g=document.getElementById('gender')?document.getElementById('gender').value:'male';
+    if(!y||!m||!d){alert('Please enter year, month and day.');return;}
+    var h=hS*2-1;if(hS===0)h=23;
+    var b=getBazi(y,m,d,h,mi),r=judge(b);
+    var E=['Jia','Yi','Bing','Ding','Wu','Ji','Geng','Xin','Ren','Gui'],A=['Rat','Ox','Tiger','Rabbit','Dragon','Snake','Horse','Goat','Monkey','Rooster','Dog','Pig'],EL=['Wood','Wood','Fire','Fire','Earth','Earth','Metal','Metal','Water','Water'],S={Wood:'🌳',Fire:'🔥',Earth:'⛰️',Metal:'⚔️',Water:'💧'},L=['Year','Month','Day','Hour'],Ds=['Family & heritage','Career & social','YOUR CORE','Later life & talent'],Z=['Water','Earth','Wood','Wood','Earth','Fire','Fire','Earth','Metal','Metal','Earth','Water'];
+    document.getElementById('animalLine').innerHTML=(g==='male'?'♂ Male':'♀ Female')+' | Animal: '+A[b.dz[0]];
+    var ph='';
+    for(var i=0;i<4;i++){ph+='<div class="pillar"><div class="plabel">'+L[i]+'</div><div class="ganzhi">'+Gan[b.tg[i]]+Zhi[b.dz[i]]+'</div><div class="english">'+E[b.tg[i]]+' '+A[b.dz[i]]+'</div><div class="element">'+S[EL[b.tg[i]]]+' '+EL[b.tg[i]]+' + '+S[Z[b.dz[i]]]+' '+Z[b.dz[i]]+'</div><div class="desc">'+Ds[i]+'</div></div>';}
+    document.getElementById('pillars').innerHTML=ph;
+    var sn=[2,3,4].includes(b.dz[1])?0:[5,6,7].includes(b.dz[1])?1:[8,9,10].includes(b.dz[1])?2:3,ys=[{Wood:'Fire',Fire:'Wood',Earth:'Fire',Metal:'Earth',Water:'Earth'},{Wood:'Water',Fire:'Water',Earth:'Water',Metal:'Water',Water:'Earth'},{Wood:'Wood',Fire:'Wood',Earth:'Fire',Metal:'Water',Water:'Wood'},{Wood:'Fire',Fire:'Wood',Earth:'Fire',Metal:'Fire',Water:'Fire'}],ye=ys[sn][EL[b.tg[2]]]||'Earth',ji={Wood:'Metal',Fire:'Water',Earth:'Wood',Metal:'Fire',Water:'Earth'}[ye]||'Fire';
+    document.getElementById('ysContainer').innerHTML='<div class="ys-box"><h3>Yong Shen (用神)</h3><div class="big">'+S[ye]+' '+ye+'</div><p>Activate '+ye+' in your home.</p></div>';
+    document.getElementById('jsContainer').innerHTML='<div class="js-box"><h3>Ji Shen (忌神)</h3><div class="big">'+S[ji]+' '+ji+'</div><p>Minimize '+ji.toLowerCase()+'.</p></div>';
+    document.getElementById('result').classList.add('visible');document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
+  } catch(e){alert('Error: '+e.message);}
+}
+document.addEventListener('DOMContentLoaded',function(){var btn=document.getElementById('calcBtn');if(btn)btn.addEventListener('click',calc);});
+</script>
+</body>
+</html>
